@@ -17,7 +17,7 @@ Author.create = async (connection, authorFirstname, authorLastname) => {
 }
 
 /**
- * Knygos autoriaus irasymas i duomenu baze.
+ * Knygu autoriu saraso isspausdinimas.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
  * @returns Visu autoriu, irasytu i duomenu baze, sarasas.
  */
