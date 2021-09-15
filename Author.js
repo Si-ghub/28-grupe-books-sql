@@ -5,7 +5,7 @@ const Author = {};
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
  * @param {string} authorFirstname Autoriaus vardas.
  * @param {string} authorLastname Autoriaus pavarde.
- * @returns Tekstas, apibudinantis, koks autorius buvo irasytas i duomenu baze.
+ * @returns {Promise<string>} Tekstas, apibudinantis, koks autorius buvo irasytas i duomenu baze.
  */
 
 Author.create = async (connection, authorFirstname, authorLastname) => {
@@ -19,7 +19,7 @@ Author.create = async (connection, authorFirstname, authorLastname) => {
 /**
  * Knygu autoriu saraso isspausdinimas.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
- * @returns Visu autoriu, irasytu i duomenu baze, sarasas.
+ * @returns {Promise<string>} Visu autoriu, irasytu i duomenu baze, sarasas.
  */
 
 Author.listAll = async (connection) => {
@@ -34,7 +34,23 @@ Author.listAll = async (connection) => {
     return list + authorsList.join('\n');
 }
 
+/**
+ * Knygu autoriu saraso isspausdinimas.
+ * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
+ * @param {number} authorId Autoriaus ID numeris.
+ * @returns {Promise<string>} Autoriaus vardas ir pavarde, pagal nurodyta ID numeri.
+ */
+
+
 Author.findById = async (connection, authorId) => {
+    const sql = 'SELECT * FROM `authors`\
+            WHERE `id`= ' + authorId;
+    const [rows] = await connection.execute(sql);
+
+    const firstName = rows[0].firstname;
+    const lastName = rows[0].lastname;
+    return `Pasirinktas autorius:\n ${firstName} ${lastName}.`
+
 }
 
 Author.findByFirstname = async (connection, authorFirstname) => {

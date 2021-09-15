@@ -31,6 +31,16 @@ app.init = async () => {
     console.log('');
     const authorsList = await Author.listAll(conn);
     console.log(authorsList);
+
+    // findById
+    console.log('');
+    const authorsById1 = await Author.findById(conn, 1);
+    const authorsById2 = await Author.findById(conn, 2);
+    const authorsById3 = await Author.findById(conn, 3);
+
+    console.log(authorsById1);
+    console.log(authorsById2);
+    console.log(authorsById3);
 }
 
 
