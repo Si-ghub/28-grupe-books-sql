@@ -7,7 +7,6 @@ const Author = {};
  * @param {string} authorLastname Autoriaus pavarde.
  * @returns {Promise<string>} Tekstas, apibudinantis, koks autorius buvo irasytas i duomenu baze.
  */
-
 Author.create = async (connection, authorFirstname, authorLastname) => {
     const sql = 'INSERT INTO `authors`\
                     (`id`, `firstname`, `lastname`)\
@@ -21,7 +20,6 @@ Author.create = async (connection, authorFirstname, authorLastname) => {
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
  * @returns {Promise<string>} Visu autoriu, irasytu i duomenu baze, sarasas.
  */
-
 Author.listAll = async (connection) => {
     const sql = 'SELECT * FROM `authors`';
     const [rows] = await connection.execute(sql);
@@ -35,28 +33,61 @@ Author.listAll = async (connection) => {
 }
 
 /**
- * Knygu autoriu saraso isspausdinimas.
+ * Knygu autoriaus isspausdinimas pagal ID, nurodant varda ir pavarde.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
  * @param {number} authorId Autoriaus ID numeris.
  * @returns {Promise<string>} Autoriaus vardas ir pavarde, pagal nurodyta ID numeri.
  */
-
-
 Author.findById = async (connection, authorId) => {
     const sql = 'SELECT * FROM `authors`\
-            WHERE `id`= ' + authorId;
+                     WHERE `id`= ' + authorId;
     const [rows] = await connection.execute(sql);
 
-    const firstName = rows[0].firstname;
-    const lastName = rows[0].lastname;
-    return `Pasirinktas autorius:\n ${firstName} ${lastName}.`
-
+    if (rows.length === 0) {
+        return `Autorius nerastas`
+    } else {
+        const firstName = rows[0].firstname;
+        const lastName = rows[0].lastname;
+        return `Pasirinktas autorius:\n ${firstName} ${lastName}.`
+    }
 }
 
+/**
+ * Knygu autoriaus isspausdinimas pagal varda, nurodant ir ID.
+ * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
+ * @param {string} authorFirstname  Autoriaus vardas.
+ * @returns {Promise<string>} Autoriaus vardas, pagal nurodyta ID numeri.
+ */
 Author.findByFirstname = async (connection, authorFirstname) => {
+    const sql = 'SELECT * FROM `authors`\
+                    WHERE `firstname`= "'+ authorFirstname + '" ';
+    const [rows] = await connection.execute(sql);
+    console.log(rows);
+    if (rows.length === 0) {
+        return `Autorius nerastas`
+    } else {
+        const authorID = rows[0].id;
+        return `Pasirinktas autorius pagal varda:\n ID ${authorID} First name: ${authorFirstname}.`
+    }
 }
 
+/**
+ * Knygu autoriaus isspausdinimas pagal pavarde, nurodant ir ID.
+ * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
+ * @param {string} authorLastname  Autoriaus pavarde.
+ * @returns {Promise<string>} Autoriaus pavarde, pagal nurodyta ID numeri.
+ */
 Author.findByLastname = async (connection, authorLastname) => {
+    const sql = 'SELECT * FROM `authors`\
+                    WHERE `lastname`= "'+ authorLastname + '" ';
+    const [rows] = await connection.execute(sql);
+
+    if (rows.length === 0) {
+        return `Autorius nerastas`
+    } else {
+        const authorID = rows[0].id;
+        return `Pasirinktas autorius pagal pavarde:\n ID ${authorID} Last name: ${authorLastname}.`
+    }
 }
 
 Author.updatePropertyById = async (connection, authorId, propertyName, propertyValue) => {

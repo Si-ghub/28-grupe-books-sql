@@ -13,19 +13,16 @@ app.init = async () => {
     });
 
     // LOGIC BELOW
+
     // create
     console.log('');
-    const paula = await Author.create(conn, 'Paula', 'Paulaviciute')
-    const vardas = await Author.create(conn, 'Vardenis', 'Pavardenis');
-    const tomas = await Author.create(conn, 'Tomas', 'Manas');
-    const alessandro = await Author.create(conn, 'Alessandro', 'Baricco');
-    const michael = await Author.create(conn, 'Michael', 'Ondaatje');
+    const name1 = await Author.create(conn, 'Paula', 'Paulaviciute')
+    const name2 = await Author.create(conn, 'Vardenis', 'Pavardenis');
+    const name3 = await Author.create(conn, 'Tomas', 'Manas');
 
-    console.log(paula);
-    console.log(vardas);
-    console.log(tomas);
-    console.log(alessandro);
-    console.log(michael);
+    console.log(name1);
+    console.log(name2);
+    console.log(name3);
 
     // listAll
     console.log('');
@@ -41,6 +38,26 @@ app.init = async () => {
     console.log(authorsById1);
     console.log(authorsById2);
     console.log(authorsById3);
+
+    // findByFirstName
+    console.log('');
+    const authorsByFirstName1 = await Author.findByFirstname(conn, 'Paula');
+    const authorsByFirstName2 = await Author.findByFirstname(conn, 'Vardenis');
+    const authorsByFirstName3 = await Author.findByFirstname(conn, 'Tomas');
+
+    console.log(authorsByFirstName1);
+    console.log(authorsByFirstName2);
+    console.log(authorsByFirstName3);
+
+    // findByLastName
+    console.log('');
+    const authorsByLastName1 = await Author.findByLastname(conn, 'Paulaviciute');
+    const authorsByLastName2 = await Author.findByLastname(conn, 'Pavardenis');
+    const authorsByLastName3 = await Author.findByLastname(conn, 'Manas');
+
+    console.log(authorsByLastName1);
+    console.log(authorsByLastName2);
+    console.log(authorsByLastName3);
 }
 
 
