@@ -14,11 +14,14 @@ app.init = async () => {
 
     // LOGIC BELOW
 
+    //AUTHOR AUTHOR AUTHOR AUTHOR AUTHOR
+
     // create
     console.log('');
     const name1 = await Author.create(conn, 'Paula', 'Paulaviciute')
     const name2 = await Author.create(conn, 'Vardenis', 'Pavardenis');
     const name3 = await Author.create(conn, 'Tomas', 'Manas');
+    const name4 = await Author.create(conn, 'Tadas', 'Blinda');
 
     console.log(name1);
     console.log(name2);
@@ -58,6 +61,29 @@ app.init = async () => {
     console.log(authorsByLastName1);
     console.log(authorsByLastName2);
     console.log(authorsByLastName3);
+
+    // updatePropertyById
+    console.log('');
+    const updateById1 = await Author.updatePropertyById(conn, 1, 'lastname', 'Paulavice');
+    const updateById2 = await Author.updatePropertyById(conn, 2, 'firstname', 'Vardas');
+
+    console.log(updateById1);
+    console.log(updateById2);
+
+    // delete
+    console.log('');
+    const deleteAuthor1 = await Author.delete(conn, 3);
+
+    console.log(deleteAuthor1);
+
+    //BOOKS BOOKS BOOKS BOOKS BOOKS
+
+    // create
+    console.log('');
+    const createBooks = await Books.create(conn, 3, 'Jura vandenynas', 1990);
+
+    console.log(createBooks);
+
 }
 
 

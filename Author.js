@@ -90,10 +90,43 @@ Author.findByLastname = async (connection, authorLastname) => {
     }
 }
 
+/**
+ * Autoriaus savybes atnaujinimas pagal nurodyta ID.
+ * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
+ * @param {number} authorId Autoriaus ID numeris.
+ * @param {string} propertyName Savybes pavadinimas.
+ * @param {string} propertyValue Savybes nauja reiksme.
+ * @returns {Promise<string>} Tekstas, nurodantis, kad autoriaus pagal nurodyta ID, nurodyta savybe atnaujinta. 
+ */
 Author.updatePropertyById = async (connection, authorId, propertyName, propertyValue) => {
+    const sql = 'UPDATE `authors` SET\
+        '+ propertyName + ' = "' + propertyValue + '"\
+            WHERE `authors`.`id` =' + authorId;
+    [rows] = await connection.execute(sql);
+
+    if (rows.length === 0) {
+        return `Autorius pagal ID ${authorId} nerastas`;
+    } else {
+        return `Autoriaus duomenys pagal ID ${authorId} sekmingai atnaujinti`;
+    }
 }
 
+/**
+ * Autoriaus istrinimas pagal nurodyta ID
+ * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
+ * @param {number} authorId Autoriaus ID numeris.
+ * @returns {Promise<string>} Tekstas, nurodantis, kad autorius pagal nurodyta ID yra istrintas. 
+ */
 Author.delete = async (connection, authorId) => {
+    const sql = 'DELETE FROM `authors`\
+                    WHERE `authors`.`id`='+ authorId;
+    const [rows] = await connection.execute(sql);
+
+    if (rows.length === 0) {
+        return `Autorius pagal ID ${authorId} nerastas`;
+    } else {
+        return `Autorius pagal ID ${authorId} sekmingai istrintas`;
+    }
 }
 
 module.exports = Author;
