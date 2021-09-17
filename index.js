@@ -80,9 +80,15 @@ app.init = async () => {
 
     // create
     console.log('');
-    const createBooks = await Books.create(conn, 3, 'Jura vandenynas', 1990);
+    const createBooks1 = await Books.create(conn, 1, 'Jura', 1990);
+    const createBooks2 = await Books.create(conn, 2, 'Vandevynas', 1991);
+    const createBooks3 = await Books.create(conn, 3, 'Upe', 1992);
+    const createBooks4 = await Books.create(conn, 4, 'Ezeras', 1993);
 
-    console.log(createBooks);
+    console.log(createBooks1);
+    console.log(createBooks2);
+    console.log(createBooks3);
+    console.log(createBooks4);
 
 }
 

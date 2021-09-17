@@ -15,8 +15,8 @@ const Books = {};
  */
 Books.create = async (connection, authorId, bookName, bookReleaseYear) => {
     const sql = 'INSERT INTO `books`\
-                    (`authorId`, `bookName`, `bookReleaseYear`)\
-                VALUES (NULL, "' + authorId + '", "' + bookName + '" , "' + bookReleaseYear + '")';
+                    (`author_id`, `book_name`, `release_year`)\
+                VALUES ("' + authorId + '", "' + bookName + '" , "' + bookReleaseYear + '")';
     const [rows] = await connection.execute(sql);
 
     return `Knygos autoriaus ${authorId} knyga ${bookName}, isleista ${bookReleaseYear} buvo sekmingai irasyta`;
