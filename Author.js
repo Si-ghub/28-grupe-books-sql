@@ -1,18 +1,26 @@
 const Author = {};
+const Validations = require('./Validations');
 
 /**
- * Knygos autoriaus irasymas i duomenu baze.
+ * Knygos autoriaus irasymas i duomenu banze.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes manipuliavimo metodus.
  * @param {string} authorFirstname Autoriaus vardas.
  * @param {string} authorLastname Autoriaus pavarde.
  * @returns {Promise<string>} Tekstas, apibudinantis, koks autorius buvo irasytas i duomenu baze.
  */
 Author.create = async (connection, authorFirstname, authorLastname) => {
+    if (!Validations.isValidFirstName(authorFirstname)) {
+        return `ERROR: invalid string entry.`
+    }
+    if (!Validations.isValidFirstName(authorLastname)) {
+        return `ERROR: invalid string entry.`
+    }
+
     const sql = 'INSERT INTO `authors`\
                     (`id`, `firstname`, `lastname`)\
                 VALUES (NULL, "'+ authorFirstname + '", "' + authorLastname + '")';
     const [rows] = await connection.execute(sql);
-    return `${authorFirstname} ${authorLastname} buvo sekmingai irasytas`;
+    return `${authorFirstname} ${authorLastname} buvo sekmingai irasytas`
 }
 
 /**
@@ -27,7 +35,7 @@ Author.listAll = async (connection) => {
     const authorsList = [];
     for (let { firstname, lastname } of rows) {
         authorsList.push(`${++count}. ${firstname} ${lastname}`);
-    };
+    }
     const list = 'Autoriu sarasas:\n';
     return list + authorsList.join('\n');
 }
@@ -62,7 +70,7 @@ Author.findByFirstname = async (connection, authorFirstname) => {
     const sql = 'SELECT * FROM `authors`\
                     WHERE `firstname`= "'+ authorFirstname + '" ';
     const [rows] = await connection.execute(sql);
-    console.log(rows);
+
     if (rows.length === 0) {
         return `Autorius nerastas`
     } else {
@@ -105,9 +113,9 @@ Author.updatePropertyById = async (connection, authorId, propertyName, propertyV
     [rows] = await connection.execute(sql);
 
     if (rows.length === 0) {
-        return `Autorius pagal ID ${authorId} nerastas`;
+        return `Autorius pagal ID ${authorId} nerastas.`
     } else {
-        return `Autoriaus duomenys pagal ID ${authorId} sekmingai atnaujinti`;
+        return `Autoriaus duomenys pagal ID ${authorId} sekmingai atnaujinti.`
     }
 }
 
@@ -123,9 +131,9 @@ Author.delete = async (connection, authorId) => {
     const [rows] = await connection.execute(sql);
 
     if (rows.length === 0) {
-        return `Autorius pagal ID ${authorId} nerastas`;
+        return `Autorius pagal ID ${authorId} nerastas.`
     } else {
-        return `Autorius pagal ID ${authorId} sekmingai istrintas`;
+        return `Autorius pagal ID ${authorId} sekmingai istrintas.`
     }
 }
 

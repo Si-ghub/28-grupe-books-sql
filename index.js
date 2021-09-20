@@ -22,10 +22,13 @@ app.init = async () => {
     const name2 = await Author.create(conn, 'Vardenis', 'Pavardenis');
     const name3 = await Author.create(conn, 'Tomas', 'Manas');
     const name4 = await Author.create(conn, 'Tadas', 'Blinda');
+    const name5 = await Author.create(conn, 'Laura', 'May');
 
     console.log(name1);
     console.log(name2);
     console.log(name3);
+    console.log(name4);
+    console.log(name5);
 
     // listAll
     console.log('');
@@ -90,8 +93,50 @@ app.init = async () => {
     console.log(createBooks3);
     console.log(createBooks4);
 
-}
+    // listAll
+    console.log('');
+    const listAllBooks = await Books.listAll(conn);
+    console.log(listAllBooks);
 
+    // findByName
+    console.log('');
+    const booksByName1 = await Books.findByName(conn, 'Jura');
+    const booksByName2 = await Books.findByName(conn, 'Vandevynas');
+    const booksByName3 = await Books.findByName(conn, 'Upe');
+
+    console.log(booksByName1);
+    console.log(booksByName2);
+    console.log(booksByName3);
+
+    console.log('');
+    const booksByYear1 = await Books.findByYear(conn, 1990, 'Jura');
+    const booksByYear2 = await Books.findByYear(conn, 1991, 'Vandevynas');
+    const booksByYear3 = await Books.findByYear(conn, 1992, 'Upe');
+
+    console.log(booksByYear1);
+    console.log(booksByYear2);
+    console.log(booksByYear3);
+
+    console.log('');
+    const bookUpdateById1 = await Books.updateById(conn, 1, 'book_name', 'Juodoji jura');
+    console.log(bookUpdateById1);
+
+    console.log('');
+    const updateNameById1 = await Books.updateNameById(conn, 1, 'Rami jura');
+    console.log(updateNameById1);
+
+    console.log('');
+    const updateYearById1 = await Books.updateYearById(conn, 1, '1994');
+    console.log(updateYearById1);
+
+    console.log('');
+    const booksDelete1 = await Books.delete(conn, 2);
+    console.log(booksDelete1);
+
+    console.log('');
+    const deleteAllByAuthorId1 = await Books.deleteAllByAuthorId(conn, 3);
+    console.log(deleteAllByAuthorId1);
+}
 
 app.init();
 
