@@ -63,7 +63,7 @@ Books.findByName = async (connection, bookName) => {
 }
 
 /**
- * 
+ * Knygos paieska pagal isleidimo metus.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes mainpuliavimo metodus.
  * @param {number} bookReleaseYear Skaicius, knygos leidimo metai.
  * @returns {Promise<string>} Tekstas, knygu sarasas pagal leidimo metus. 
@@ -83,7 +83,7 @@ Books.findByYear = async (connection, bookReleaseYear) => {
 }
 
 /**
- * 
+ * Knygos savybes atnaujinimas pagal knygos ID.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes mainpuliavimo metodus.
  * @param {number} bookId Knygos ID.
  * @param {string} propertyName Knygos savybes pavadinimas.
@@ -99,7 +99,7 @@ Books.updateById = async (connection, bookId, propertyName, propertyValue) => {
 }
 
 /**
- * 
+ * Knygos pavadinimo atnaujinimas pagal ID.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes mainpuliavimo metodus.
  * @param {number} bookId Knygos ID.
  * @param {string} bookName Knygos pavadinimas.
@@ -114,7 +114,7 @@ Books.updateNameById = async (connection, bookId, bookName) => {
 }
 
 /**
- * 
+ * Knygos isleidimo metu atnaujinimas pagal knygos ID.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes mainpuliavimo metodus.
  * @param {number} bookId Knygos ID.
  * @param {string} bookReleaseYear Atnaujinti knygos isleidimo metai. 
@@ -129,7 +129,7 @@ Books.updateYearById = async (connection, bookId, bookReleaseYear) => {
 }
 
 /**
- * 
+ * Knygos istrinimas, pagal nurodyta knygos ID.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes mainpuliavimo metodus.
  * @param {number} bookId Knygos ID.
  * @returns {Promise<string>} Tekstas, knyga pagal nurodyta ID istrinta.
@@ -142,7 +142,7 @@ Books.delete = async (connection, bookId) => {
 }
 
 /**
- * 
+ * Visu autoriaus, pagal nurodyta ID knygu istrinimas.
  * @param {Object} connection Objektas, su kuriuo kvieciame duombazes mainpuliavimo metodus.
  * @param {number} authorId Autoriaus ID.
  * @returns {Promise<string>} Tekstas, visos nurodyto autoriaus ID knygos istrintos.
