@@ -1,5 +1,6 @@
-const Author = {};
 const Validations = require('./Validations');
+
+const Author = {};
 
 /**
  * Knygos autoriaus irasymas i duomenu banze.

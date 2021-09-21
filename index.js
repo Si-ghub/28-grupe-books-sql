@@ -18,17 +18,17 @@ app.init = async () => {
 
     // create
     console.log('');
-    const name1 = await Author.create(conn, 'Paula', 'Paulaviciute')
-    const name2 = await Author.create(conn, 'Vardenis', 'Pavardenis');
-    const name3 = await Author.create(conn, 'Tomas', 'Manas');
-    const name4 = await Author.create(conn, 'Tadas', 'Blinda');
-    const name5 = await Author.create(conn, 'Laura', 'May');
+    const authorCreate1 = await Author.create(conn, 'Paula', 'Paulaviciute');
+    const authorCreate2 = await Author.create(conn, 'Vardenis', 'Pavardenis');
+    const authorCreate3 = await Author.create(conn, 'Tomas', 'Manas');
+    const authorCreate4 = await Author.create(conn, 'Tadas', 'Blinda');
+    const authorCreate5 = await Author.create(conn, 'Laura', 'May');
 
-    console.log(name1);
-    console.log(name2);
-    console.log(name3);
-    console.log(name4);
-    console.log(name5);
+    console.log(authorCreate1);
+    console.log(authorCreate2);
+    console.log(authorCreate3);
+    console.log(authorCreate4);
+    console.log(authorCreate5);
 
     // listAll
     console.log('');
